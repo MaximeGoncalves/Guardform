@@ -1,0 +1,99 @@
+@layer utilities {
+    .text-primary {
+        @apply text-gray-900 dark:text-gray-50
+    }
+
+    .text-secondary {
+        @apply text-gray-700 dark:text-gray-300
+    }
+
+    .text-secondary_hover {
+        @apply text-gray-800 dark:text-gray-200
+    }
+
+    .text-tertiary {
+        @apply text-gray-600 dark:text-gray-400
+    }
+
+    .text-quarterary {
+        @apply text-gray-500 dark:text-gray-400
+    }
+
+    .text-disabled {
+        @apply text-gray-500 dark:text-gray-500
+    }
+
+    .text-placeholder {
+        @apply text-gray-300 dark:text-gray-400
+    }
+
+    /* Border */
+    .border-primary {
+        @apply border-gray-300 dark:border-gray-700
+    }
+
+    .border-secondary {
+        @apply border-gray-200 dark:border-gray-800
+    }
+
+    .border-tertiary {
+        @apply border-gray-100 dark:border-gray-800
+    }
+
+    .border-disabled {
+        @apply border-gray-300 dark:border-gray-700
+    }
+
+
+    /* Background */
+    .bg-primary {
+        @apply bg-white dark:bg-gray-950
+    }
+
+    .bg-primary_hover {
+        @apply bg-gray-50 dark:bg-gray-800
+    }
+
+    .bg-primary-solid {
+        @apply bg-gray-950 dark:bg-gray-900
+    }
+
+    .bg-secondary {
+        @apply bg-gray-50 dark:bg-gray-900
+    }
+
+    .bg-secondary_hover {
+        @apply bg-gray-100 dark:bg-gray-800
+    }
+
+    .bg-tertiary {
+        @apply bg-gray-100 dark:bg-gray-800
+    }
+
+    .bg-secondary_hover {
+        @apply bg-gray-200 dark:bg-gray-700
+    }
+
+    .bg-disabled {
+        @apply bg-gray-100 dark:bg-gray-800
+    }
+
+    .bg-active {
+        @apply bg-gray-50 dark:bg-gray-800
+    }
+
+
+    /* Divide */
+    .divide-primary {
+        @apply divide-gray-300 dark:divide-gray-700
+    }
+
+    .divide-secondary {
+        @apply divide-gray-200 dark:divide-gray-800
+    }
+
+    .divide-tertiary {
+        @apply divide-gray-100 dark:divide-gray-800
+    }
+
+}

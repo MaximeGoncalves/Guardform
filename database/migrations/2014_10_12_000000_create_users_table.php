@@ -17,7 +17,18 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->integer('section')->default(1);
             $table->rememberToken();
+            $table->timestamps();
+        });
+
+        Schema::create('agents', function (Blueprint $table) {
+            $table->id();
+            $table->string('firstname');
+            $table->string('name');
+            $table->string('status'); // SPP SPV
+            $table->string('cycle')->nullable(); // 12 24
+            $table->integer('section')->nullable();
             $table->timestamps();
         });
     }

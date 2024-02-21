@@ -1,5 +1,7 @@
 import './bootstrap';
 import '../css/app.css';
+import '@vuepic/vue-datepicker/dist/main.css'
+import 'vue-select/dist/vue-select.css';
 
 import { createApp, h } from 'vue';
 import { createInertiaApp } from '@inertiajs/vue3';
