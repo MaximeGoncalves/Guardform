@@ -3,8 +3,8 @@ import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
-import { Link, useForm, usePage } from '@inertiajs/vue3';
-
+import {Link, useForm, usePage} from '@inertiajs/vue3';
+import VSelect from "vue-select";
 defineProps({
     mustVerifyEmail: {
         type: Boolean,
@@ -19,6 +19,7 @@ const user = usePage().props.auth.user;
 const form = useForm({
     name: user.name,
     email: user.email,
+    section: user.section,
 });
 </script>
 
@@ -34,7 +35,7 @@ const form = useForm({
 
         <form @submit.prevent="form.patch(route('profile.update'))" class="mt-6 space-y-6">
             <div>
-                <InputLabel for="name" value="Name" />
+                <InputLabel for="name" value="Name"/>
 
                 <TextInput
                     id="name"
@@ -46,11 +47,11 @@ const form = useForm({
                     autocomplete="name"
                 />
 
-                <InputError class="mt-2" :message="form.errors.name" />
+                <InputError class="mt-2" :message="form.errors.name"/>
             </div>
 
             <div>
-                <InputLabel for="email" value="Email" />
+                <InputLabel for="email" value="Email"/>
 
                 <TextInput
                     id="email"
@@ -61,7 +62,15 @@ const form = useForm({
                     autocomplete="username"
                 />
 
-                <InputError class="mt-2" :message="form.errors.email" />
+                <InputError class="mt-2" :message="form.errors.email"/>
+            </div>
+
+            <div>
+                <InputLabel for="name" value="Section"/>
+
+                <VSelect :options="[1,2,3,4]" v-model="form.section"></VSelect>
+
+                <InputError class="mt-2" :message="form.errors.section"/>
             </div>
 
             <div v-if="mustVerifyEmail && user.email_verified_at === null">
