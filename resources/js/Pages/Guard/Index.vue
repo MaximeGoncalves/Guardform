@@ -14,7 +14,7 @@
             </thead>
             <tbody>
             <tr v-for="guard in guards" :key="guard.id">
-                <td>{{ moment(guard.date).format('DD/MM/YYYY') }}</td>
+                <td class="w-full">{{ moment(guard.date).format('DD/MM/YYYY') }}</td>
                 <td>
                     <div class="flex items-center space-x-2">
                         <Link
@@ -22,8 +22,8 @@
                             :href="route('forms.edit', form.id)"
                              class="py-1 px-2 rounded"
                              :class="form.is_night
-                             ? 'bg-blue-700 text-white'
-                             : 'bg-yellow-400 text-white'">
+                             ? 'bg-gray-800 text-white'
+                             : 'bg-gray-400 text-white'">
                             {{ form.is_night ? 'Nuit' : 'Jour' }}
                         </Link>
                     </div>

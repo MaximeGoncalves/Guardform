@@ -2,7 +2,7 @@ import './bootstrap';
 import '../css/app.css';
 import '@vuepic/vue-datepicker/dist/main.css'
 import 'vue-select/dist/vue-select.css';
-
+import Notifications from "@kyvg/vue3-notification";
 import { createApp, h } from 'vue';
 import { createInertiaApp } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
@@ -16,6 +16,7 @@ createInertiaApp({
     setup({ el, App, props, plugin }) {
         return createApp({ render: () => h(App, props) })
             .use(plugin)
+            .use(Notifications)
             .use(ZiggyVue)
             .mount(el);
     },

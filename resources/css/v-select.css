@@ -1,0 +1,87 @@
+.vs__dropdown-menu {
+    z-index: 999;
+    top: calc(100% + 10px) !important;
+    @apply rounded bg-primary border border-secondary text-secondary !important;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+    color: black;
+}
+
+.vs__selected-options {
+    @apply w-full !text-ellipsis !overflow-hidden;
+}
+
+.vs__dropdown-option {
+    color: black;
+    @apply text-primary !important;
+}
+
+.vs__dropdown-option--highlight {
+    @apply bg-indigo-600 !important;
+}
+
+.vs__dropdown-menu::-webkit-scrollbar {
+    @apply hidden;
+}
+
+.vs__search {
+    @apply mt-0 border-0 py-2 text-base leading-5 bg-transparent !important;
+}
+
+.vs__selected {
+    @apply mt-0 text-primary !important;
+}
+
+.vs--multiple .vs__selected {
+    @apply rounded-md bg-primary text-secondary border-secondary !important;
+    height: 30px;
+    margin: 3px 2px !important;
+}
+
+.vs__deselect {
+    @apply fill-gray-400 dark:fill-gray-600
+}
+
+.vs__dropdown-toggle {
+    @apply rounded-md border border-primary bg-primary text-primary p-0  !important;
+}
+
+.vs--single.vs--open .vs__selected {
+    @apply absolute top-1/2 -translate-y-1/2 transform !important;
+}
+
+.vs--open .vs__dropdown-toggle {
+    @apply rounded-md border border-indigo-500 outline-none ring-4 ring-indigo-100 ring-offset-0 dark:border-indigo-300 dark:ring-indigo-900 !important;
+}
+
+.v-select.error .vs__dropdown-toggle, .vs--open.error .vs__dropdown-toggle {
+    @apply border-red-500 dark:ring-red-900 !important;
+}
+
+.vs--open .vs__dropdown-toggle:hover {
+    @apply bg-transparent;
+}
+
+.vs__open-indicator {
+    @apply hidden;
+}
+
+.vs__search::placeholder {
+    @apply text-sm text-gray-400 dark:text-gray-500 !important;
+}
+
+.vs__actions {
+    @apply p-0 !important;
+}
+
+.vs__actions .vs__clear {
+    @apply fill-current !important;
+}
+
+.vs--disabled .vs__dropdown-toggle, .vs--disabled .vs__search {
+    background-color: transparent !important;
+}
+
+.vs__dropdown-option.vs__dropdown-option--disabled {
+    display: none;
+}

@@ -42,12 +42,12 @@ return new class extends Migration
             $table->foreignId('cond_vsr')->nullable();
             $table->foreignId('eq_vsr')->nullable();
 
-            $table->foreignId('ca_ftpl')->nullable();
-            $table->foreignId('cond_ftpl')->nullable();
-            $table->foreignId('ce1_ftpl')->nullable();
-            $table->foreignId('ce2_ftpl')->nullable();
-            $table->foreignId('eq1_ftpl')->nullable();
-            $table->foreignId('eq2_ftpl')->nullable();
+            $table->foreignId('ca_fptl')->nullable();
+            $table->foreignId('cond_fptl')->nullable();
+            $table->foreignId('ce1_fptl')->nullable();
+            $table->foreignId('ce2_fptl')->nullable();
+            $table->foreignId('eq1_fptl')->nullable();
+            $table->foreignId('eq2_fptl')->nullable();
 
             $table->foreignId('vli')->nullable();
             $table->foreignId('epa')->nullable();

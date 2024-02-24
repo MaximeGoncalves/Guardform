@@ -23,10 +23,82 @@ class DatabaseSeeder extends Seeder
              'section' => 2
          ]);
 
-         Agent::factory(50)->create();
 
          foreach (Skills::cases() as $skill) {
              Skill::create(['name' => $skill->name()]);
          }
+
+//        Agent::factory(50)->create();
+
+         // je veux ajouter des skills aux agents aleatoirement
+
+        Agent::create([
+            'firstname' => 'Maxime',
+            'name' => 'Goncalves',
+            'status' => 'SPP',
+            'section' => 2,
+            'cycle' => 24
+        ]);
+        Agent::create([
+            'firstname' => 'Cyril',
+            'name' => 'Moschetti',
+            'status' => 'SPP',
+            'section' => 2,
+            'cycle' => 24
+        ]);
+        Agent::create([
+            'firstname' => 'Nicolas',
+            'name' => 'Doyen',
+            'status' => 'SPP',
+            'section' => 2,
+            'cycle' => 12
+        ]);
+        Agent::create([
+            'firstname' => 'Partice',
+            'name' => 'Bertron',
+            'status' => 'SPP',
+            'section' => 2,
+            'cycle' => 24
+        ]);
+        Agent::create([
+            'firstname' => 'Olivier',
+            'name' => 'Ferrando',
+            'status' => 'SPP',
+            'section' => 2,
+            'cycle' => 24
+        ]);
+        Agent::create([
+            'firstname' => 'Phillipe',
+            'name' => 'Basso',
+            'status' => 'SPP',
+            'section' => 2,
+            'cycle' => 12
+        ]);
+        Agent::create([
+            'firstname' => 'Cyril',
+            'name' => 'Avakyan',
+            'status' => 'SPP',
+            'section' => 2,
+            'cycle' => 12
+        ]);
+        Agent::create([
+            'firstname' => 'John',
+            'name' => 'Pons',
+            'status' => 'SPP',
+            'section' => 2,
+            'cycle' => 24
+        ]);
+        Agent::create([
+            'firstname' => 'Gregoire',
+            'name' => 'Behem',
+            'status' => 'SPP',
+            'section' => 2,
+            'cycle' => 12
+        ]);
+
+        $skills = Skill::all();
+        Agent::all()->each(function ($agent) use ($skills) {
+            $agent->skills()->attach($skills);
+        });
     }
 }

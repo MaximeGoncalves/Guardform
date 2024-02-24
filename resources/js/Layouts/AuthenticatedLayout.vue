@@ -1,11 +1,33 @@
 <script setup>
-import { ref } from 'vue';
+import {computed, onBeforeUpdate, ref, watch} from 'vue';
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
 import NavLink from '@/Components/NavLink.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
-import { Link } from '@inertiajs/vue3';
+import {Link, usePage} from '@inertiajs/vue3';
+import { notify } from '@kyvg/vue3-notification'
+import {CheckIcon, ExclamationCircleIcon} from "@heroicons/vue/24/outline";
+
+const errors = computed(() => usePage().props.flash.errors)
+const success = computed(() => usePage().props.flash.success)
+
+watch(() => usePage().props.flash.success, (value) => {
+    if (value) {
+        notify({ title: value, type: 'success' })
+    }
+})
+
+watch(() => usePage().props.flash.errors, (value, oldValue) => {
+    if (value) {
+        notify({ title: value, type: 'error' })
+    }
+})
+
+onBeforeUpdate(() => {
+    usePage().props.flash.success = null
+    usePage().props.flash.errors = null
+})
 
 const showingNavigationDropdown = ref(false);
 </script>
@@ -150,6 +172,30 @@ const showingNavigationDropdown = ref(false);
                     <slot name="header" />
                 </div>
             </header>
+
+            <notifications position="top right" width="400">
+                <template #body="props">
+                    <div
+                        class="mt-4 mr-4 flex items-center gap-x-4 rounded-lg border p-4 shadow-xl border-secondary bg-primary">
+                        <div
+                            :class="props.item.type === 'success' ? 'ring-green-200 dark:ring-green-900 bg-green-300 dark:bg-green-600 border-transparent' : 'ring-red-100 bg-red-200 dark:ring-red-900 dark:bg-red-700' "
+                            class="self-start rounded-full p-1 ring-8">
+                            <component :is="props.item.type === 'success'  ? CheckIcon : ExclamationCircleIcon"
+                                       :class="props.item.type === 'success' ? 'text-green-600 dark:text-green-100' : 'text-red-600 dark:text-red-400'"
+                                       class="h-5 w-5 font-semibold"/>
+                        </div>
+                        <div>
+                            <p :class="props.item.type === 'success' ? 'text-green-700 dark:text-green-100' : 'text-red-600 dark:text-red-400'"
+                               class="notification-title">
+                                {{ props.item.title }}
+                            </p>
+
+                            <div class="notification-content" v-html="props.item.text"/>
+                        </div>
+                    </div>
+                </template>
+            </notifications>
+
 
             <!-- Page Content -->
             <main>

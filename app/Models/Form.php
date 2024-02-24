@@ -16,4 +16,9 @@ class Form extends Model
     {
         return $this->belongsToMany(Agent::class);
     }
+
+    public function garde(): \Illuminate\Database\Eloquent\Relations\BelongsTo|Form
+    {
+        return $this->belongsTo(Guard::class, 'guard_id', 'id');
+    }
 }

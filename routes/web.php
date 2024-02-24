@@ -30,6 +30,8 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
+    Route::put('/forms/{form}/agents', \App\Http\Controllers\AddAgentToFormController::class)->name('forms.agents.add');
+    Route::put('/forms/{form}/agents/delete', \App\Http\Controllers\RemoveAgentFromFormController::class)->name('forms.agents.delete');
     Route::resource('/guards', \App\Http\Controllers\GuardController::class);
     Route::resource('/agents', \App\Http\Controllers\AgentController::class);
     Route::resource('/forms', \App\Http\Controllers\FormController::class);

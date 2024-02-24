@@ -9,7 +9,7 @@ class GuardController
 {
     public function index()
     {
-        return inertia('Guard/Index', ['guards' => Guard::with('forms')->get()]);
+        return inertia('Guard/Index', ['guards' => Guard::with('forms')->orderBy('date')->get()]);
     }
 
     public function store()
