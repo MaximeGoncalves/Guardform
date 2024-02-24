@@ -11,7 +11,7 @@ class FormController
     public function edit(Form $form)
     {
         $form = $form->load('agents.skills', 'garde');
-        $form->agents->each(fn ($agent) => $agent->getStats($form->is_night));
+        $form->agents->each(fn ($agent) => $agent->getStats($form));
         return inertia('Form/Edit', [
             'form' => $form,
             'agents' => Agent::query()->whereNotIn('id', $form->agents->pluck('id'))->get(),

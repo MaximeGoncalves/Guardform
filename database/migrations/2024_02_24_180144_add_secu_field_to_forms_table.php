@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::table('forms', function (Blueprint $table) {
             $table->foreignId('secu')->nullable();
+            $table->foreignId('pharmacie')->nullable();
+            $table->foreignId('remise')->nullable();
+            $table->foreignId('cuisine')->nullable();
         });
     }
 

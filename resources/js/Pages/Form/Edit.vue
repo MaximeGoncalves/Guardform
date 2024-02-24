@@ -9,9 +9,9 @@
             <primary-button @click="update" :form="data" :icon="PlusIcon">Enregistrer</primary-button>
         </header>
 
-        <div class="flex space-x-2 items-start">
+        <div class="lg:flex lg:space-x-2 items-start max-lg:space-y-4">
             <FormAgent :agents :form :data></FormAgent>
-            <div class="flex-1 bg-white grid grid-cols-4 gap-4 p-2 shadow rounded items-start">
+            <div class="flex-1 bg-white grid grid-col-1 lg:grid-cols-4 gap-x-4 gap-y-8 p-2 shadow rounded items-start">
                 <VsavCard :agents="form.agents"
                           :form="data"
                           title="VSAV 1"
@@ -60,21 +60,40 @@
                     v-model:eq1="data.eq1_fptl"
                     v-model:eq2="data.eq2_fptl"
                 />
-                <VliCard :agents="form.agents"
-                          :form="data"
-                          title="VLI"
-                          v-model="data.vli"
-                />
-                <EpaCard :agents="form.agents"
-                         :form="data"
-                         title="EPA"
-                         v-model="data.epa"
-                />
+                <div class="space-y-4">
+                    <VliCard :agents="form.agents"
+                             :form="data"
+                             title="VLI"
+                             v-model="data.vli"
+                    />
+                    <EpaCard :agents="form.agents"
+                             :form="data"
+                             title="EPA"
+                             v-model="data.epa"
+                    />
+                </div>
                 <SecuCard :agents="form.agents"
                          :form="data"
                          title="Cadre securité"
                          v-model="data.secu"
                 />
+                <div class="space-y-4" v-if="!form.is_night">
+                    <PharmacieCard
+                        :agents="form.agents"
+                        :form="data"
+                        title="Pharmacie"
+                        v-model="data.pharmacie"/>
+                    <RemiseCard
+                        :agents="form.agents"
+                        :form="data"
+                        title="Remise"
+                        v-model="data.remise"/>
+                    <CuisineCard
+                        :agents="form.agents"
+                        :form="data"
+                        title="Cuisine"
+                        v-model="data.cuisine"/>
+                </div>
 
             </div>
         </div>
@@ -94,6 +113,10 @@ import EpaCard from "@/Pages/Form/vehicles/EpaCard.vue";
 import {PlusIcon} from "@heroicons/vue/24/outline/index.js";
 import moment from "moment/min/moment-with-locales";
 import SecuCard from "@/Pages/Form/vehicles/SecuCard.vue";
+import PharmacieCard from "@/Pages/Form/vehicles/PharmacieCard.vue";
+import RemiseCard from "@/Pages/Form/vehicles/RemiseCard.vue";
+import CuisineCard from "@/Pages/Form/vehicles/CuisineCard.vue";
+import {watch} from "vue";
 
 defineOptions({layout: AuthenticatedLayout})
 
@@ -122,6 +145,9 @@ const data = useForm({
     vli: props.form.vli,
     epa: props.form.epa,
     secu: props.form.secu,
+    pharmacie: props.form.pharmacie,
+    remise: props.form.remise,
+    cuisine: props.form.cuisine,
 })
 
 function update() {

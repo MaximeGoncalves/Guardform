@@ -17,12 +17,7 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
+    return redirect()->route('dashboard');
 });
 
 Route::get('/dashboard', function () {
@@ -34,6 +29,7 @@ Route::middleware('auth')->group(function () {
     Route::put('/forms/{form}/agents/delete', \App\Http\Controllers\RemoveAgentFromFormController::class)->name('forms.agents.delete');
     Route::resource('/guards', \App\Http\Controllers\GuardController::class);
     Route::resource('/agents', \App\Http\Controllers\AgentController::class);
+    Route::resource('/users', \App\Http\Controllers\UserController::class);
     Route::resource('/forms', \App\Http\Controllers\FormController::class);
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

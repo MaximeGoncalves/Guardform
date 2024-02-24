@@ -1,5 +1,5 @@
 <template>
-    <nav class="bg-white w-1/5 p-1 shadow rounded">
+    <nav class="bg-white w-full lg:w-1/5 p-2 shadow rounded">
         <div class="flex items-center justify-between mb-4">
             <h2>
                 Agents
@@ -16,7 +16,6 @@
                                              v-if="Object.values(data).indexOf(agent.id) === -1" @click="removeAgent(agent.id)"/>
                 </li>
             </ul>
-
             <span>Total : {{ form.agents.length }}</span>
         </div>
         <hr class="my-2">

@@ -59,8 +59,12 @@ const showingNavigationDropdown = ref(false);
                                     Gardes
                                 </NavLink>
 
-                                <NavLink :href="route('agents.index')" :active="route().current('users.*')">
+                                <NavLink :href="route('agents.index')" :active="route().current('agents.*')">
                                     Agents
+                                </NavLink>
+                                <NavLink :href="route('users.index')" :active="route().current('users.*')"
+                                         v-if="usePage().props.auth.user.is_admin">
+                                    Utilisateurs
                                 </NavLink>
                             </div>
                         </div>

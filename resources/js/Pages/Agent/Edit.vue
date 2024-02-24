@@ -4,7 +4,7 @@
             <h1 class="font-medium text-xl">Modifier un agent</h1>
         </header>
 
-        <div class="bg-white p-8 rounded shadow grid grid-cols-2 gap-8 ">
+        <div class="bg-white p-8 rounded shadow grid lg:grid-cols-2 gap-8 ">
             <VInput label="Prénom" v-model="form.firstname"/>
             <VInput label="Nom" v-model="form.name"/>
             <div>
@@ -23,7 +23,11 @@
             </div>
             <div>
                 <VLabel>Compétences</VLabel>
-                <v-select label="name" :options="skills" :close-on-select="false" v-model="form.skills" :reduce="item => item.id"
+                <v-select label="name"
+                          :options="skills" :close-on-select="false"
+                          v-model="form.skills"
+                          :selectable="item => !form.skills.includes(item.id)"
+                          :reduce="item => item.id"
                           multiple></v-select>
                 <small class="cursor-pointer text-blue-500" @click="pushSkills">Ajouter toutes les compétences</small>
             </div>

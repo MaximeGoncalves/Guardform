@@ -29,22 +29,26 @@ class Agent extends Model
         return $this->belongsToMany(Form::class);
     }
 
-    public function getStats(bool $is_night = false): void
+    public function getStats(Form $form): void
     {
-        $this->attributes['vsav'] = $this->vsavCount($is_night);
-        $this->attributes['vsav2'] = $this->vsav2Count($is_night);
-        $this->attributes['reserve'] = $this->reserveCount($is_night);
-        $this->attributes['fptl'] = $this->fptlCount($is_night);
-        $this->attributes['vli'] = $this->vliCount($is_night);
-        $this->attributes['epa'] = $this->epaCount($is_night);
-        $this->attributes['secu'] = $this->secuCount($is_night);
+        $this->attributes['vsav'] = $this->vsavCount($form->id, $form->is_night);
+        $this->attributes['vsav2'] = $this->vsav2Count($form->id, $form->is_night);
+        $this->attributes['reserve'] = $this->reserveCount($form->id, $form->is_night);
+        $this->attributes['fptl'] = $this->fptlCount($form->id, $form->is_night);
+        $this->attributes['vli'] = $this->vliCount($form->id, $form->is_night);
+        $this->attributes['epa'] = $this->epaCount($form->id, $form->is_night);
+        $this->attributes['secu'] = $this->secuCount($form->id, $form->is_night);
+        $this->attributes['pharmacie'] = $this->pharmacieCount($form->id,);
+        $this->attributes['remise'] = $this->remiseCount($form->id,);
+        $this->attributes['cuisine'] = $this->cuisineCount($form->id,);
     }
 
-    private function vsavCount(bool $is_night)
+    private function vsavCount(int $id, bool $is_night)
     {
 
         $query = $this->forms()
             ->with('garde')
+            ->whereNot('forms.id', $id)
             ->where(function ($query) use ($is_night) {
                 $query
                     ->where('ca_vsav1', $this->id)
@@ -65,9 +69,10 @@ class Agent extends Model
         ];
     }
 
-    private function vsav2Count(bool $is_night)
+    private function vsav2Count(int $id, bool $is_night)
     {
         $query = $this->forms()
+            ->whereNot('forms.id', $id)
             ->where(function ($query) {
                 $query->where('ca_vsav2', $this->id)
                     ->orWhere('cond_vsav2', $this->id)
@@ -81,9 +86,10 @@ class Agent extends Model
         ];
     }
 
-    private function reserveCount(bool $is_night)
+    private function reserveCount(int $id, bool $is_night)
     {
         $query = $this->forms()
+            ->whereNot('forms.id', $id)
             ->where(function ($query) {
                 $query->where('ca_vtu', $this->id)
                     ->orWhere('cond_vtu', $this->id)
@@ -100,9 +106,10 @@ class Agent extends Model
         ];
     }
 
-    private function fptlCount(bool $is_night)
+    private function fptlCount(int $id, bool $is_night)
     {
         $query = $this->forms()
+            ->whereNot('forms.id', $id)
             ->where(function ($query) {
                 $query->where('ca_fptl', $this->id)
                     ->orWhere('cond_fptl', $this->id)
@@ -118,9 +125,10 @@ class Agent extends Model
         ];
     }
 
-    private function vliCount(bool $is_night)
+    private function vliCount(int $id, bool $is_night)
     {
         $query = $this->forms()
+            ->whereNot('forms.id', $id)
             ->where('vli', $this->id)
             ->where('is_night', $is_night);
 
@@ -130,10 +138,11 @@ class Agent extends Model
         ];
     }
 
-    private function epaCount(bool $is_night)
+    private function epaCount(int $id, bool $is_night)
     {
         $query = $this->forms()
             ->with('garde')
+            ->whereNot('forms.id', $id)
             ->where('epa', $this->id)
             ->where('is_night', $is_night);
 
@@ -142,12 +151,53 @@ class Agent extends Model
             'last' => $query->get()->sortByDesc('garde.date')->first()?->garde->date
         ];
     }
-    private function secuCount(bool $is_night)
+
+    private function secuCount(int $id, bool $is_night)
     {
         $query = $this->forms()
             ->with('garde')
+            ->whereNot('forms.id', $id)
             ->where('secu', $this->id)
             ->where('is_night', $is_night);
+
+        return [
+            'count' => $query->count(),
+            'last' => $query->get()->sortByDesc('garde.date')->first()?->garde->date
+        ];
+    }
+
+    private function pharmacieCount(int $id)
+    {
+        $query = $this->forms()
+            ->with('garde')
+            ->whereNot('forms.id', $id)
+            ->where('pharmacie', $this->id);
+
+        return [
+            'count' => $query->count(),
+            'last' => $query->get()->sortByDesc('garde.date')->first()?->garde->date
+        ];
+    }
+
+    private function remiseCount(int $id)
+    {
+        $query = $this->forms()
+            ->with('garde')
+            ->whereNot('forms.id', $id)
+            ->where('remise', $this->id);
+
+        return [
+            'count' => $query->count(),
+            'last' => $query->get()->sortByDesc('garde.date')->first()?->garde->date
+        ];
+    }
+
+    private function cuisineCount(int $id)
+    {
+        $query = $this->forms()
+            ->with('garde')
+            ->whereNot('forms.id', $id)
+            ->where('cuisine', $this->id);
 
         return [
             'count' => $query->count(),

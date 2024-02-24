@@ -15,22 +15,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
 
-         \App\Models\User::factory()->create([
-             'name' => 'Maxime Goncalves',
-             'email' => 'maxime.goncalves@sdis06.fr',
-             'section' => 2
-         ]);
+        \App\Models\User::factory()->create([
+            'name' => 'Maxime Goncalves',
+            'email' => 'maxime.goncalves@sdis06.fr',
+            'section' => 2,
+            'is_admin' => true
+        ]);
 
 
-         foreach (Skills::cases() as $skill) {
-             Skill::create(['name' => $skill->name()]);
-         }
-
-//        Agent::factory(50)->create();
-
-         // je veux ajouter des skills aux agents aleatoirement
+        foreach (Skills::cases() as $skill) {
+            Skill::create(['name' => $skill->name()]);
+        }
 
         Agent::create([
             'firstname' => 'Maxime',

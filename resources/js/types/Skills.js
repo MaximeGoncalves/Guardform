@@ -21,4 +21,7 @@ export default {
 	EPA: 8,
 	COD1: 9,
 	COD2: 10,
+	PHARMACIE: 11,
+	REMISE: 11,
+	CUISINE: 11
 }
