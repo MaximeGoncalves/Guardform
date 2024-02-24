@@ -70,6 +70,11 @@
                          title="EPA"
                          v-model="data.epa"
                 />
+                <SecuCard :agents="form.agents"
+                         :form="data"
+                         title="Cadre securité"
+                         v-model="data.secu"
+                />
 
             </div>
         </div>
@@ -88,6 +93,7 @@ import VliCard from "@/Pages/Form/vehicles/VliCard.vue";
 import EpaCard from "@/Pages/Form/vehicles/EpaCard.vue";
 import {PlusIcon} from "@heroicons/vue/24/outline/index.js";
 import moment from "moment/min/moment-with-locales";
+import SecuCard from "@/Pages/Form/vehicles/SecuCard.vue";
 
 defineOptions({layout: AuthenticatedLayout})
 
@@ -115,6 +121,7 @@ const data = useForm({
     eq2_fptl: props.form.eq2_fptl,
     vli: props.form.vli,
     epa: props.form.epa,
+    secu: props.form.secu,
 })
 
 function update() {

@@ -8,7 +8,7 @@
         <template #option="option">
             <div class="flex items-center justify-between">
                 <h3 >{{ option.fullname }}</h3>
-                <div class="space-x-0.5">
+                <div class="space-x-0.5" v-if="option[stats]">
                     <small v-if="option[stats].last" class="bg-primary px-2 py-0.5 rounded text-primary">{{ moment(option[stats].last).locale('fr').format('LL') }}</small>
                     <small v-if="option[stats].count" class="bg-gray-900 px-2 py-0.5 rounded text-gray-300">{{ option[stats].count }}</small>
                 </div>

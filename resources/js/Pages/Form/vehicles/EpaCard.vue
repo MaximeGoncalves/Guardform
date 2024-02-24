@@ -1,7 +1,7 @@
 <template>
     <div>
         <h2>{{ title }}</h2>
-        <VehicleSelect label="fullname" :options="vli_agents" placeholder="CA" v-model="vli" :reduce="item => item.id"
+        <VehicleSelect label="fullname" :options="vli_agents" placeholder="COND" v-model="vli" :reduce="item => item.id"
                  :selectable="selectable" stats="epa"></VehicleSelect>
     </div>
 </template>

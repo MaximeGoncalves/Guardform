@@ -37,6 +37,7 @@ class Agent extends Model
         $this->attributes['fptl'] = $this->fptlCount($is_night);
         $this->attributes['vli'] = $this->vliCount($is_night);
         $this->attributes['epa'] = $this->epaCount($is_night);
+        $this->attributes['secu'] = $this->secuCount($is_night);
     }
 
     private function vsavCount(bool $is_night)
@@ -134,6 +135,18 @@ class Agent extends Model
         $query = $this->forms()
             ->with('garde')
             ->where('epa', $this->id)
+            ->where('is_night', $is_night);
+
+        return [
+            'count' => $query->count(),
+            'last' => $query->get()->sortByDesc('garde.date')->first()?->garde->date
+        ];
+    }
+    private function secuCount(bool $is_night)
+    {
+        $query = $this->forms()
+            ->with('garde')
+            ->where('secu', $this->id)
             ->where('is_night', $is_night);
 
         return [

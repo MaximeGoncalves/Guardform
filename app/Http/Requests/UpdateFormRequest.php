@@ -45,6 +45,7 @@ class UpdateFormRequest extends FormRequest
             'eq_vsr' => 'nullable|numeric',
             'vli' => 'nullable|numeric',
             'epa' => 'nullable|numeric',
+            'secu' => 'nullable|numeric',
         ];
     }
 }
