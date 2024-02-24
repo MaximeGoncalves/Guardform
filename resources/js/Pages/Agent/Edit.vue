@@ -23,7 +23,7 @@
             </div>
             <div>
                 <VLabel>Compétences</VLabel>
-                <v-select label="name" :options="skills" v-model="form.skills" :reduce="item => item.id"
+                <v-select label="name" :options="skills" :close-on-select="false" v-model="form.skills" :reduce="item => item.id"
                           multiple></v-select>
                 <small class="cursor-pointer text-blue-500" @click="pushSkills">Ajouter toutes les compétences</small>
             </div>

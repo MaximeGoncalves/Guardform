@@ -44,14 +44,17 @@ class Agent extends Model
 
         $query = $this->forms()
             ->with('garde')
-            ->where(function ($query) {
+            ->where(function ($query) use ($is_night) {
                 $query
                     ->where('ca_vsav1', $this->id)
                     ->orWhere('cond_vsav1', $this->id)
                     ->orWhere('eq_vsav1', $this->id)
-                    ->orWhere('ca_vsav2', $this->id)
-                    ->orWhere('cond_vsav2', $this->id)
-                    ->orWhere('eq_vsav2', $this->id);
+                    ->when(!$is_night, function ($query) {
+                        $query
+                            ->orWhere('ca_vsav2', $this->id)
+                            ->orWhere('cond_vsav2', $this->id)
+                            ->orWhere('eq_vsav2', $this->id);
+                    });
             })
             ->where('is_night', $is_night);
 

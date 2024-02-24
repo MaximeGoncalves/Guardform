@@ -19,20 +19,20 @@
                           v-model:cond="data.cond_vsav1"
                           v-model:eq="data.eq_vsav1"
                 />
-                <VsavCard v-if="!form.is_night" :agents="form.agents"
+                <VsavCard :agents="form.agents"
                           :form="data"
                           title="VSAV 2"
                           v-model:ca="data.ca_vsav2"
                           v-model:cond="data.cond_vsav2"
                           v-model:eq="data.eq_vsav2"
                 />
-                <VtuCard v-else :agents="form.agents"
-                         :form="data"
-                         title="VSAV 2"
-                         v-model:ca="data.ca_vsav2"
-                         v-model:cond="data.cond_vsav2"
-                         v-model:eq="data.eq_vsav2"
-                />
+<!--                <VtuCard v-else :agents="form.agents"-->
+<!--                         :form="data"-->
+<!--                         title="VSAV 2"-->
+<!--                         v-model:ca="data.ca_vsav2"-->
+<!--                         v-model:cond="data.cond_vsav2"-->
+<!--                         v-model:eq="data.eq_vsav2"-->
+<!--                />-->
                 <VtuCard
                     :agents="form.agents"
                     :form="data"
@@ -94,6 +94,7 @@ defineOptions({layout: AuthenticatedLayout})
 const props = defineProps({form: Object, agents: Array})
 
 const data = useForm({
+    is_night: props.form.is_night,
     ca_vsav1: props.form.ca_vsav1,
     cond_vsav1: props.form.cond_vsav1,
     eq_vsav1: props.form.eq_vsav1,

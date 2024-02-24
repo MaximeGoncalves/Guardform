@@ -12,6 +12,10 @@ class Form extends Model
 
     protected $guarded = [];
 
+    protected $casts = [
+        'is_night' => 'boolean'
+    ];
+
     public function agents(): BelongsToMany
     {
         return $this->belongsToMany(Agent::class);

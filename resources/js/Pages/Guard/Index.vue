@@ -5,7 +5,7 @@
             <PrimaryButton @click="showModal= true">Nouvelle Garde</PrimaryButton>
         </header>
 
-        <table>
+        <table class="bg-white shadow rounded">
             <thead>
             <tr>
                 <th>Date</th>

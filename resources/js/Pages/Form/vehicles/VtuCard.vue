@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="space-y-1">
         <h2>{{ title }}</h2>
         <VehicleSelect label="fullname" :options="ca_agents" placeholder="CA" v-model="ca" :reduce="item => item.id"
                        :selectable="selectable" :stats="getStatsLabel()"></VehicleSelect>

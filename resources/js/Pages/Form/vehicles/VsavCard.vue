@@ -1,12 +1,13 @@
 <template>
-    <div>
+    <div class="space-y-1">
         <h2>{{ title }}</h2>
         <VehicleSelect label="fullname" :options="ca_agents" placeholder="CA" v-model="ca" :reduce="item => item.id"
-                 :selectable="selectable" stats="vsav"></VehicleSelect>
-        <VehicleSelect label="fullname" :options="cond_agents" placeholder="COND" v-model="cond" :reduce="item => item.id"
-                 :selectable="selectable" stats="vsav"></VehicleSelect>
+                       :selectable="selectable" :stats="getLabel()"></VehicleSelect>
+        <VehicleSelect label="fullname" :options="cond_agents" placeholder="COND" v-model="cond"
+                       :reduce="item => item.id"
+                       :selectable="selectable" :stats="getLabel()"></VehicleSelect>
         <VehicleSelect label="fullname" :options="eq_agents" placeholder="EQ" v-model="eq" :reduce="item => item.id"
-                 :selectable="selectable" stats="vsav"></VehicleSelect>
+                       :selectable="selectable" :stats="getLabel()"></VehicleSelect>
     </div>
 </template>
 
@@ -36,5 +37,16 @@ const eq_agents = computed(() => {
 
 const selectable = function (item) {
     return Object.values(props.form).indexOf(item.id) < 0
+}
+
+function getLabel() {
+    if(props.form.is_night){
+        if(props.title === 'VSAV 1'){
+            return 'vsav'
+        }else {
+            return 'vsav2'
+        }
+    }
+    return 'vsav';
 }
 </script>
