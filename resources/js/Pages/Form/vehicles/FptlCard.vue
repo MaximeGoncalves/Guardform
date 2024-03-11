@@ -49,9 +49,9 @@ const eq_agents = computed(() => {
 })
 
 const selectable = function (item) {
-    return Object.values(props.form).indexOf(item.id) < 0 ||
-        item.id === props.form.cuisine
-        || item.id === props.form.pharmacie
-        || item.id === props.form.remise
+    const { remise, pharmacie, cuisine, ...restForm } = props.form;
+
+    // Vérifie si l'ID de l'élément est présent dans le reste du formulaire (hors exceptions)
+    return Object.values(restForm).indexOf(item.id) < 0
 }
 </script>
