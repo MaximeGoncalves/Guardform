@@ -18,7 +18,7 @@ class Form extends Model
 
     public function agents(): BelongsToMany
     {
-        return $this->belongsToMany(Agent::class);
+        return $this->belongsToMany(Agent::class)->orderBy('name');
     }
 
     public function garde(): \Illuminate\Database\Eloquent\Relations\BelongsTo|Form
