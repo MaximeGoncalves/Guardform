@@ -2,6 +2,7 @@
     <div class="container mx-auto">
         <header class="my-8 bg-white p-4 rounded shadow flex items-center justify-between">
             <h1 class="font-medium text-xl">Modifier un agent</h1>
+            <DangerButton @click="deleteAgent">Supprimer</DangerButton>
         </header>
 
         <div class="bg-white p-8 rounded shadow grid lg:grid-cols-2 gap-8 ">
@@ -42,11 +43,12 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import VInput from "@/Components/Base/VInput.vue";
-import {useForm} from "@inertiajs/vue3";
+import {router, useForm} from "@inertiajs/vue3";
 import VSelect from 'vue-select'
 import {watch} from "vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import VLabel from "@/Components/Base/VLabel.vue";
+import DangerButton from "@/Components/DangerButton.vue";
 
 defineOptions({layout: AuthenticatedLayout})
 const props = defineProps({skills: Array, agent: Object})
@@ -74,4 +76,8 @@ watch(() => form.status, (value) => {
         form.section = null
     }
 })
+
+function deleteAgent(){
+    router.delete(route('agents.destroy', props.agent.id), {})
+}
 </script>

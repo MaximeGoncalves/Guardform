@@ -22,6 +22,7 @@ class AgentController
             'skills' => Skill::all()
         ]);
     }
+
     public function edit(Agent $agent)
     {
         return inertia('Agent/Edit', [
@@ -49,6 +50,7 @@ class AgentController
         return redirect()->route('agents.index');
 
     }
+
     public function update(Request $request, Agent $agent)
     {
         $validated = $request->validate([
@@ -67,5 +69,11 @@ class AgentController
 
         return redirect()->route('agents.index');
 
+    }
+
+    public function destroy(Agent $agent)
+    {
+        $agent->delete();
+        return redirect()->route('agents.index');
     }
 }
