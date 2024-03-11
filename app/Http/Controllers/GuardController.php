@@ -12,7 +12,7 @@ class GuardController
 {
     public function index()
     {
-        return inertia('Guard/Index', ['guards' => Guard::with('forms')->orderBy('date')->get()]);
+        return inertia('Guard/Index', ['guards' => Guard::with('forms')->orderByDesc('date')->get()]);
     }
 
     public function store(StoreGuardRequest $request)
