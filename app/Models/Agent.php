@@ -35,6 +35,8 @@ class Agent extends Model
         $this->attributes['vsav'] = $this->vsavCount($form->id, $form->is_night);
         $this->attributes['vsav2'] = $this->vsav2Count($form->id, $form->is_night);
         $this->attributes['reserve'] = $this->reserveCount($form->id, $form->is_night);
+        $this->attributes['cafptl'] = $this->cafptlCount($form->id, $form->is_night);
+        $this->attributes['condfptl'] = $this->condfptlCount($form->id, $form->is_night);
         $this->attributes['fptl'] = $this->fptlCount($form->id, $form->is_night);
         $this->attributes['vli'] = $this->vliCount($form->id, $form->is_night);
         $this->attributes['epa'] = $this->epaCount($form->id, $form->is_night);
@@ -107,14 +109,40 @@ class Agent extends Model
         ];
     }
 
+    private function cafptlCount(int $id, bool $is_night)
+    {
+        $query = $this->forms()
+            ->whereNot('forms.id', $id)
+            ->where(function ($query) {
+                $query->where('ca_fptl', $this->id);
+            })
+            ->where('is_night', $is_night);
+        return [
+            'count' => $query->count(),
+            'last' => $query->get()->sortByDesc('garde.date')->first()?->garde->date
+        ];
+    }
+
+    private function condfptlCount(int $id, bool $is_night)
+    {
+        $query = $this->forms()
+            ->whereNot('forms.id', $id)
+            ->where(function ($query) {
+                $query->where('cond_fptl', $this->id);
+            })
+            ->where('is_night', $is_night);
+        return [
+            'count' => $query->count(),
+            'last' => $query->get()->sortByDesc('garde.date')->first()?->garde->date
+        ];
+    }
+
     private function fptlCount(int $id, bool $is_night)
     {
         $query = $this->forms()
             ->whereNot('forms.id', $id)
             ->where(function ($query) {
-                $query->where('ca_fptl', $this->id)
-                    ->orWhere('cond_fptl', $this->id)
-                    ->orWhere('ce1_fptl', $this->id)
+                    $query->orWhere('ce1_fptl', $this->id)
                     ->orWhere('ce2_fptl', $this->id)
                     ->orWhere('eq1_fptl', $this->id)
                     ->orWhere('eq2_fptl', $this->id);

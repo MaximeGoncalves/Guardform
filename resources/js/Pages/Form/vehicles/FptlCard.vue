@@ -2,10 +2,10 @@
     <div class="space-y-1">
         <h2>{{ title }}</h2>
         <VehicleSelect label="fullname" :options="ca_agents" placeholder="CA" v-model="ca" :reduce="item => item.id"
-                       :selectable="selectable" stats="fptl"></VehicleSelect>
+                       :selectable="selectable" stats="cafptl"></VehicleSelect>
         <VehicleSelect label="fullname" :options="cond_agents" placeholder="COND" v-model="cond"
                        :reduce="item => item.id"
-                       :selectable="selectable" stats="fptl"></VehicleSelect>
+                       :selectable="selectable" stats="condfptl"></VehicleSelect>
         <VehicleSelect label="fullname" :options="ce_agents" placeholder="CE1" v-model="ce1" :reduce="item => item.id"
                        :selectable="selectable" stats="fptl"></VehicleSelect>
         <VehicleSelect label="fullname" :options="ce_agents" placeholder="CE2" v-model="ce2" :reduce="item => item.id"
