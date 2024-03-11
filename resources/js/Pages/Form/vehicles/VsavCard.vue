@@ -36,7 +36,10 @@ const eq_agents = computed(() => {
 })
 
 const selectable = function (item) {
-    return Object.values(props.form).indexOf(item.id) < 0
+    return Object.values(props.form).indexOf(item.id) < 0 ||
+        item.id === props.form.cuisine
+        || item.id === props.form.pharmacie
+        || item.id === props.form.remise
 }
 
 function getLabel() {

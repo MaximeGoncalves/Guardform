@@ -2,17 +2,18 @@
     <div class="space-y-1">
         <h2>{{ title }}</h2>
         <VehicleSelect label="fullname" :options="ca_agents" placeholder="CA" v-model="ca" :reduce="item => item.id"
-                 :selectable="selectable" stats="fptl"></VehicleSelect>
-        <VehicleSelect label="fullname" :options="cond_agents" placeholder="COND" v-model="cond" :reduce="item => item.id"
-                 :selectable="selectable" stats="fptl"></VehicleSelect>
+                       :selectable="selectable" stats="fptl"></VehicleSelect>
+        <VehicleSelect label="fullname" :options="cond_agents" placeholder="COND" v-model="cond"
+                       :reduce="item => item.id"
+                       :selectable="selectable" stats="fptl"></VehicleSelect>
         <VehicleSelect label="fullname" :options="ce_agents" placeholder="CE1" v-model="ce1" :reduce="item => item.id"
-                 :selectable="selectable" stats="fptl"></VehicleSelect>
+                       :selectable="selectable" stats="fptl"></VehicleSelect>
         <VehicleSelect label="fullname" :options="ce_agents" placeholder="CE2" v-model="ce2" :reduce="item => item.id"
-                 :selectable="selectable" stats="fptl"></VehicleSelect>
+                       :selectable="selectable" stats="fptl"></VehicleSelect>
         <VehicleSelect label="fullname" :options="eq_agents" placeholder="EQ1" v-model="eq1" :reduce="item => item.id"
-                 :selectable="selectable" stats="fptl"></VehicleSelect>
+                       :selectable="selectable" stats="fptl"></VehicleSelect>
         <VehicleSelect label="fullname" :options="eq_agents" placeholder="EQ2" v-model="eq2" :reduce="item => item.id"
-                 :selectable="selectable" stats="fptl"></VehicleSelect>
+                       :selectable="selectable" stats="fptl"></VehicleSelect>
     </div>
 </template>
 
@@ -48,6 +49,9 @@ const eq_agents = computed(() => {
 })
 
 const selectable = function (item) {
-    return Object.values(props.form).indexOf(item.id) < 0
+    return Object.values(props.form).indexOf(item.id) < 0 ||
+        item.id === props.form.cuisine
+        || item.id === props.form.pharmacie
+        || item.id === props.form.remise
 }
 </script>
