@@ -11,9 +11,9 @@
         <div>
             <ul>
                 <li v-for="agent in form.agents" :key="agent.id" class="flex items-center justify-between bg-secondary mb-1">
-                    <span :class="{'line-through text-secondary': Object.values(data).indexOf(agent.id) > -1}">{{ agent.name }} {{ agent.firstname }} </span>
+                    <span :class="{'line-through text-secondary': !displayable(agent)}">{{ agent.name }} {{ agent.firstname }} </span>
                         <ArchiveBoxXMarkIcon class="text-red-400 hover:text-red-600  w-4 h-4  cursor-pointer"
-                                             v-if="Object.values(data).indexOf(agent.id) === -1" @click="removeAgent(agent.id)"/>
+                                             v-if="displayable(agent)" @click="removeAgent(agent.id)"/>
                 </li>
             </ul>
             <span>Total : {{ form.agents.length }}</span>
@@ -96,4 +96,11 @@ const cod_count = computed(() => {
 const caengin_count = computed(() => {
     return props.form.agents.filter(item => item.skills.some(skill => skill.id === Skills.CA_TOUT_ENGIN)).length;
 })
+
+const displayable = function (item) {
+    const { remise, pharmacie, cuisine, ...restData } = props.data;
+
+    // Vérifie si l'ID de l'élément est présent dans le reste du formulaire (hors exceptions)
+    return Object.values(restData).indexOf(item.id) < 0
+}
 </script>
