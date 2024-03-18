@@ -8,6 +8,10 @@
         </header>
 
         <div>
+            <div class="flex justify-end space-x-4 mb-2">
+                <VInput @change="search" v-model="searchInput" class="w-72"/>
+                <PrimaryButton @click="search">Rechercher</PrimaryButton>
+            </div>
             <table>
                 <thead>
                 <tr>
@@ -39,9 +43,20 @@
 
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import {Link} from "@inertiajs/vue3";
+import {Link, router} from "@inertiajs/vue3";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
+import VInput from "@/Components/Base/VInput.vue";
+import {ref} from "vue";
 
 defineOptions({layout: AuthenticatedLayout})
 defineProps({agents: Array})
+
+
+const searchInput = ref('')
+
+function search() {
+    router.get(route('agents.index'), {search: searchInput.value}, {
+        preserveState:true
+    })
+}
 </script>

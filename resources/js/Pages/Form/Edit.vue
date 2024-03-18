@@ -2,11 +2,16 @@
     <div class="px-4 mx-auto">
         <header class="my-8 bg-white p-4 rounded shadow flex items-center justify-between">
             <div>
-                <h1 class="font-medium text-xl">{{  moment(form.garde.date).locale('fr').format('LL') }} - {{ form.is_night ? 'Nuit' : 'Jour'}}</h1>
-                <Link v-if="!form.is_night" :href="route('forms.edit', form.id + 1)" class="text-indigo-400 hover:text-indigo-600 text-sm">Modifier la nuit</Link>
-                <Link v-else :href="route('forms.edit', form.id - 1)" class="text-indigo-400 hover:text-indigo-600 text-sm">Modifier la journée</Link>
+                <h1 class="font-medium text-xl">{{ moment(form.garde.date).locale('fr').format('LL') }} -
+                    {{ form.is_night ? 'Nuit' : 'Jour' }}</h1>
+                <Link v-if="!form.is_night" :href="route('forms.edit', form.id + 1)"
+                      class="text-indigo-400 hover:text-indigo-600 text-sm">Modifier la nuit
+                </Link>
+                <Link v-else :href="route('forms.edit', form.id - 1)"
+                      class="text-indigo-400 hover:text-indigo-600 text-sm">Modifier la journée
+                </Link>
             </div>
-            <primary-button @click="update" :form="data" :icon="PlusIcon">Enregistrer</primary-button>
+<!--            <primary-button @click="update" :form="data" :icon="PlusIcon">Enregistrer</primary-button>-->
         </header>
 
         <div class="lg:flex lg:space-x-2 items-start max-lg:space-y-4">
@@ -26,13 +31,13 @@
                           v-model:cond="data.cond_vsav2"
                           v-model:eq="data.eq_vsav2"
                 />
-<!--                <VtuCard v-else :agents="form.agents"-->
-<!--                         :form="data"-->
-<!--                         title="VSAV 2"-->
-<!--                         v-model:ca="data.ca_vsav2"-->
-<!--                         v-model:cond="data.cond_vsav2"-->
-<!--                         v-model:eq="data.eq_vsav2"-->
-<!--                />-->
+                <!--                <VtuCard v-else :agents="form.agents"-->
+                <!--                         :form="data"-->
+                <!--                         title="VSAV 2"-->
+                <!--                         v-model:ca="data.ca_vsav2"-->
+                <!--                         v-model:cond="data.cond_vsav2"-->
+                <!--                         v-model:eq="data.eq_vsav2"-->
+                <!--                />-->
                 <VtuCard
                     :agents="form.agents"
                     :form="data"
@@ -73,9 +78,9 @@
                     />
                 </div>
                 <SecuCard :agents="form.agents"
-                         :form="data"
-                         title="Cadre securité"
-                         v-model="data.secu"
+                          :form="data"
+                          title="Cadre securité"
+                          v-model="data.secu"
                 />
                 <div class="space-y-4" v-if="!form.is_night">
                     <PharmacieCard
@@ -150,8 +155,12 @@ const data = useForm({
     cuisine: props.form.cuisine,
 })
 
+watch(() => data.data() , function (old, value) {
+    update()
+})
+
 function update() {
-    data.put(route('forms.update', props.form.id) )
+    data.put(route('forms.update', props.form.id))
 }
 
 </script>

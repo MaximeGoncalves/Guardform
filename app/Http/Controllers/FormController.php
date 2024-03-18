@@ -21,6 +21,6 @@ class FormController
     public function update(UpdateFormRequest $request, Form $form)
     {
         $form->update($request->validated());
-        return redirect()->back()->with('success', 'Mis à jour avec succès');
+        return redirect()->back();
     }
 }

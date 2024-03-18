@@ -10,10 +10,14 @@
         </div>
         <div>
             <ul>
-                <li v-for="agent in form.agents" :key="agent.id" class="flex items-center justify-between bg-secondary mb-1">
-                    <span :class="{'line-through text-secondary': !displayable(agent)}">{{ agent.name }} {{ agent.firstname }} </span>
-                        <ArchiveBoxXMarkIcon class="text-red-400 hover:text-red-600  w-4 h-4  cursor-pointer"
-                                             v-if="displayable(agent)" @click="removeAgent(agent.id)"/>
+                <li v-for="agent in form.agents" :key="agent.id"
+                    class="flex items-center justify-between bg-secondary mb-1">
+                    <span :class="{'line-through text-secondary': !displayable(agent)}">{{
+                            agent.name
+                        }} {{ agent.firstname }} </span>
+                    <VBadge color="brand" v-if="!displayable(agent)">{{ getVehicle(agent) }}</VBadge>
+                    <ArchiveBoxXMarkIcon class="text-red-400 hover:text-red-600 w-4 h-4 cursor-pointer"
+                                         v-if="displayable(agent)" @click="removeAgent(agent.id)"/>
                 </li>
             </ul>
             <span>Total : {{ form.agents.length }}</span>
@@ -62,8 +66,10 @@ import {router} from "@inertiajs/vue3";
 import Skills from "@/types/Skills.js";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import {PlusIcon, ArchiveBoxXMarkIcon} from "@heroicons/vue/24/outline/index.js";
+import VBadge from "@/Components/Base/VBadge.vue";
+import Poste from "@/types/Poste.js";
 
-const props = defineProps({form: Object,agents: Array, data: Object})
+const props = defineProps({form: Object, agents: Array, data: Object})
 const showModal = ref(false)
 const newAgents = ref([])
 
@@ -97,8 +103,19 @@ const caengin_count = computed(() => {
     return props.form.agents.filter(item => item.skills.some(skill => skill.id === Skills.CA_TOUT_ENGIN)).length;
 })
 
+const getVehicle = function (item) {
+    let foundKey = null;
+    for (const key in props.data) {
+        if (props.data[key] === item.id) {
+            foundKey = key;
+            break; // Sortir de la boucle dès qu'on a trouvé la correspondance
+        }
+    }
+    return Poste[foundKey?.toUpperCase()];
+}
+
 const displayable = function (item) {
-    const { remise, pharmacie, cuisine, ...restData } = props.data;
+    const {remise, pharmacie, cuisine, ...restData} = props.data;
 
     // Vérifie si l'ID de l'élément est présent dans le reste du formulaire (hors exceptions)
     return Object.values(restData).indexOf(item.id) < 0

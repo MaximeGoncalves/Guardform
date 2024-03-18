@@ -14,17 +14,22 @@
                 </div>
             </div>
         </template>
+        <template #selected-option="option">
+           <VBadge color="brand" v-if="prefix" class="mr-2">{{ prefix }}</VBadge> <span>{{ option.fullname }}</span>
+        </template>
     </VSelect>
 </template>
 <script setup>
 import VSelect from "vue-select";
 import moment from "moment/min/moment-with-locales";
 import {computed} from "vue";
+import VBadge from "@/Components/Base/VBadge.vue";
 
 const props = defineProps({
     label: String,
     options: Array,
     placeholder: String,
+    prefix: String,
     selectable: Function,
     reduce: Function,
     stats: {

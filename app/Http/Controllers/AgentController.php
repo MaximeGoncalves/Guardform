@@ -9,10 +9,13 @@ use Illuminate\Support\Arr;
 
 class AgentController
 {
-    public function index()
+    public function index(Request $request)
     {
+
         return inertia('Agent/Index', [
-            'agents' => Agent::all(),
+            'agents' => Agent::when($request->search, function ($q) {
+                $q->where('name', 'like', '%' . request('search') . '%')->orWhere('firstname', 'like', '%' . request('search') . '%');
+            })->get(),
         ]);
     }
 

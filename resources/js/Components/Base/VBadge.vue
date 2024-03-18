@@ -18,7 +18,7 @@ const { size, color, icon } = defineProps({
 const selectedColor = computed(function () {
     switch (color) {
     case 'brand':
-        return 'bg-primary-50 border-primary-200 text-primary-700 dark:bg-primary-950 dark:border-primary-800 dark:text-primary-300'
+        return 'bg-indigo-50 border-indigo-200 text-indigo-700 dark:bg-indigo-950 dark:border-indigo-800 dark:text-indigo-300'
     case 'red':
         return 'bg-red-50 border-red-200 text-red-700 dark:bg-red-950 dark:border-red-800 dark:text-red-300'
     case 'emerald':
