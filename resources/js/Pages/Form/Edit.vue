@@ -11,7 +11,7 @@
                       class="text-indigo-400 hover:text-indigo-600 text-sm">Modifier la journée
                 </Link>
             </div>
-<!--            <primary-button @click="update" :form="data" :icon="PlusIcon">Enregistrer</primary-button>-->
+            <!--            <primary-button @click="update" :form="data" :icon="PlusIcon">Enregistrer</primary-button>-->
         </header>
 
         <div class="lg:flex lg:space-x-2 items-start max-lg:space-y-4">
@@ -31,13 +31,6 @@
                           v-model:cond="data.cond_vsav2"
                           v-model:eq="data.eq_vsav2"
                 />
-                <!--                <VtuCard v-else :agents="form.agents"-->
-                <!--                         :form="data"-->
-                <!--                         title="VSAV 2"-->
-                <!--                         v-model:ca="data.ca_vsav2"-->
-                <!--                         v-model:cond="data.cond_vsav2"-->
-                <!--                         v-model:eq="data.eq_vsav2"-->
-                <!--                />-->
                 <VtuCard
                     :agents="form.agents"
                     :form="data"
@@ -77,18 +70,18 @@
                              v-model="data.epa"
                     />
                 </div>
-               <div class="space-y-4">
-                   <SecuCard :agents="form.agents"
-                             :form="data"
-                             title="Cadre securité"
-                             v-model="data.secu"
-                   />
-                   <FptCard :agents="form.agents"
+                <div class="space-y-4">
+                    <SecuCard :agents="form.agents"
+                              :form="data"
+                              title="Cadre securité"
+                              v-model="data.secu"
+                    />
+                    <FptCard :agents="form.agents"
                              :form="data"
                              title="FPT"
                              v-model="data.ca_fpt"
-                   />
-               </div>
+                    />
+                </div>
                 <div class="space-y-4" v-if="!form.is_night">
                     <PharmacieCard
                         :agents="form.agents"
@@ -106,8 +99,10 @@
                         title="Cuisine"
                         v-model="data.cuisine"/>
                 </div>
-
             </div>
+        </div>
+        <div class="shadow bg-white rounded mt-4 p-1 mb-8">
+            <StatsTable :type="data.is_night ? 'Nuit' : 'Jour'" :agents="form.agents"/>
         </div>
     </div>
 </template>
@@ -130,6 +125,7 @@ import RemiseCard from "@/Pages/Form/vehicles/RemiseCard.vue";
 import CuisineCard from "@/Pages/Form/vehicles/CuisineCard.vue";
 import {watch} from "vue";
 import FptCard from "@/Pages/Form/vehicles/FptCard.vue";
+import StatsTable from "@/Pages/Stats/StatsTable.vue";
 
 defineOptions({layout: AuthenticatedLayout})
 
@@ -164,7 +160,7 @@ const data = useForm({
     cuisine: props.form.cuisine,
 })
 
-watch(() => data.data() , function (old, value) {
+watch(() => data.data(), function (old, value) {
     update()
 })
 
