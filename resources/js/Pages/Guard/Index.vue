@@ -20,8 +20,8 @@
                         <Link
                             v-for="form in guard.forms" :key="form.id"
                             :href="route('forms.edit', form.id)"
-                             class="py-1 px-2 rounded"
-                             :class="form.is_night
+                            class="py-1 px-2 rounded"
+                            :class="form.is_night
                              ? 'bg-gray-800 text-white'
                              : 'bg-gray-400 text-white'">
                             {{ form.is_night ? 'Nuit' : 'Jour' }}
@@ -50,7 +50,7 @@ import {ref} from "vue";
 import moment from 'moment/min/moment-with-locales';
 import VModal from "@/Components/Base/VModal.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
-import {useForm, Link} from "@inertiajs/vue3";
+import {useForm, Link, router} from "@inertiajs/vue3";
 import InputError from "@/Components/InputError.vue";
 
 defineOptions({layout: AuthenticatedLayout})

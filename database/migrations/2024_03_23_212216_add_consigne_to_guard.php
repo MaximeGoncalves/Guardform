@@ -11,8 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('forms', function (Blueprint $table) {
-            $table->foreignId('ca_fpt')->nullable();
+        Schema::table('guards', function (Blueprint $table) {
+            $table->text('fma1')->after('date')->nullable();
+            $table->text('fma2')->after('fma1')->nullable();
+            $table->text('consignes')->after('fma2')->nullable();
         });
     }
 
@@ -21,8 +23,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('form', function (Blueprint $table) {
-            $table->dropColumn('ca_fpt');
+        Schema::table('guards', function (Blueprint $table) {
+            $table->dropColumn(['fma1', 'fma2', 'consignes']);
         });
     }
 };

@@ -1,5 +1,5 @@
 <template>
-    <div class="px-4 mx-auto">
+    <div class="px-4 mx-auto pb-8">
         <header class="my-8 bg-white p-4 rounded shadow flex items-center justify-between">
             <div>
                 <h1 class="font-medium text-xl">{{ moment(form.garde.date).locale('fr').format('LL') }} -
@@ -99,8 +99,24 @@
                         title="Cuisine"
                         v-model="data.cuisine"/>
                 </div>
+
+                <div class="col-span-4 flex w-full space-x-4">
+                    <div class="w-2/4">
+                        <h2>FMA 1</h2>
+                        <VInput v-model="guardData.fma1"/>
+                    </div>
+                    <div class="w-2/4">
+                        <h2>FMA 2</h2>
+                        <VInput v-model="guardData.fma2"/>
+                    </div>
+                    <div class="w-full">
+                        <h2>Consignes / Notes</h2>
+                        <VTextarea v-model="guardData.consignes"></VTextarea>
+                    </div>
+                </div>
             </div>
         </div>
+
         <div class="shadow bg-white rounded mt-4 p-1 mb-8">
             <StatsTable :type="data.is_night ? 'Nuit' : 'Jour'" :agents="form.agents"/>
         </div>
@@ -109,7 +125,7 @@
 
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import {useForm, Link} from "@inertiajs/vue3";
+import {useForm, Link, router} from "@inertiajs/vue3";
 import FormAgent from "@/Pages/Form/FormAgent.vue";
 import VsavCard from "@/Pages/Form/vehicles/VsavCard.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
@@ -123,13 +139,22 @@ import SecuCard from "@/Pages/Form/vehicles/SecuCard.vue";
 import PharmacieCard from "@/Pages/Form/vehicles/PharmacieCard.vue";
 import RemiseCard from "@/Pages/Form/vehicles/RemiseCard.vue";
 import CuisineCard from "@/Pages/Form/vehicles/CuisineCard.vue";
-import {watch} from "vue";
+import {ref, watch} from "vue";
 import FptCard from "@/Pages/Form/vehicles/FptCard.vue";
 import StatsTable from "@/Pages/Stats/StatsTable.vue";
-
+import VInput from "@/Components/Base/VInput.vue";
+import debounce from 'lodash.debounce'
+import VTextarea from "@/Components/Base/VTextarea.vue";
 defineOptions({layout: AuthenticatedLayout})
 
 const props = defineProps({form: Object, agents: Array})
+const timeout = ref(null);
+
+const guardData = useForm({
+    fma1: props.form.garde.fma1,
+    fma2: props.form.garde.fma2,
+    consignes: props.form.garde.consignes,
+})
 
 const data = useForm({
     is_night: props.form.is_night,
@@ -164,8 +189,18 @@ watch(() => data.data(), function (old, value) {
     update()
 })
 
+watch(() => guardData.data(), debounce(() => {
+    guardData.put(route('guards.update', props.form.garde.id), {
+        preserveScroll: true,
+        preserveState: true,
+    })
+}, 500));
+
 function update() {
-    data.put(route('forms.update', props.form.id))
+    data.put(route('forms.update', props.form.id), {
+        preserveState: true,
+        preserveScroll: true,
+    })
 }
 
 </script>

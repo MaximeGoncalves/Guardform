@@ -36,4 +36,15 @@ class GuardController
 
         return redirect()->back();
     }
+
+    public function update(Request $request, Guard $guard)
+    {
+        $guard->update([
+            'fma1' => $request->fma1,
+            'fma2' => $request->fma2,
+            'consignes' => $request->consignes,
+        ]);
+
+        return redirect()->back();
+    }
 }

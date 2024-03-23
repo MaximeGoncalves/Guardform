@@ -20,7 +20,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr v-for="agent in agents" :key="agent.id">
+        <tr v-for="agent in filteredAgents" :key="agent.id">
             <td>{{ agent.name }} {{ agent.firstname }}</td>
             <td v-if="type !== 'Nuit'" class="text-center bg-yellow-500 text-yellow-100">{{ agent.vsav_jour }}</td>
             <td v-if="type !== 'Jour'" class="text-center bg-yellow-500 text-yellow-100">{{ agent.vsav_nuit }}</td>
@@ -41,8 +41,24 @@
     </table>
 </template>
 <script setup>
+import {computed} from "vue";
+
 const props = defineProps({
     agents: Array,
-    type: String
+    type: String,
+    section: {
+        type: String,
+        default: 'Toutes'
+    }
+})
+
+const filteredAgents = computed(() => {
+    if (props.section === 'Toutes'  ) {
+        return props.agents
+    } else if (props.section === "SPV") {
+        return props.agents.filter(agent => agent.section === null)
+    } else {
+        return props.agents.filter(agent => agent.section == props.section)
+    }
 })
 </script>

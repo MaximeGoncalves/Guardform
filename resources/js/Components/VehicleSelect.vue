@@ -41,13 +41,29 @@ const props = defineProps({
 const value = defineModel()
 
 const filteredOptions = computed(() => {
-    return props.options.sort((a, b) => {
-        if (a[props.stats]?.count !== b[props.stats]?.count) {
-            return (a[props.stats]?.count || 0) - (b[props.stats]?.count || 0);
+    return props.options.slice().sort((a, b) => {
+        const dateA = a[props.stats]?.last ? moment(a[props.stats]?.last) : null;
+        const dateB = b[props.stats]?.last ? moment(b[props.stats]?.last) : null;
+
+        if (dateA === null && dateB === null) {
+            return 0; // Les deux dates sont null, aucun changement d'ordre
+        } else if (dateA === null) {
+            return -1; // dateA est null, placer b avant a
+        } else if (dateB === null) {
+            return 1; // dateB est null, placer a avant b
         } else {
-            // Si count est égal, triez par last
-            return (moment(a[props.stats]?.last) || 0) - (moment(b[props.stats]?.last) || 0);
+            return dateA - dateB; // Comparaison des dates normalement
         }
     });
+    // return props.options.sort((a, b) => {
+    //     return a[props.stats]?.last- b[props.stats]?.last
+
+        // if (a[props.stats]?.count !== b[props.stats]?.count) {
+        //     return (a[props.stats]?.count || 0) - (b[props.stats]?.count || 0);
+        // } else {
+        //     // Si count est égal, triez par last
+        //     return (moment(a[props.stats]?.last) || 0) - (moment(b[props.stats]?.last) || 0);
+        // }
+    // });
 })
 </script>

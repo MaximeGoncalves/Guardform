@@ -15,7 +15,7 @@
                 :placeholder="placeholder"
                 :required="required"
                 :value="modelValue"
-                class="block w-full rounded-lg border p-2 text-sm text-gray-900 ring-offset-0 bg-primary placeholder:text-placeholder text-primary focus:outline-none focus:ring-4 disabled:bg-disabled"
+                class="block w-full rounded-lg border p-2 text-sm text-gray-900 ring-offset-0 bg-primary placeholder:text-placeholder text-primary focus:outline-none focus:ring-1 disabled:bg-disabled"
                 @change="$emit('change')"
                 @input="$emit('update:modelValue', $event.target.value)"/>
             <div v-if="error" class="absolute inset-y-0 right-0 mt-px flex items-center pr-3.5">

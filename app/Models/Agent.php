@@ -68,12 +68,9 @@ class Agent extends Model
 
     private function vsavCount(int|null $id, bool $is_night)
     {
-
         $query = $this->forms()
             ->with('garde')
-            ->when(!is_null($id), function ($query, $id) {
-                $query->whereNot('forms.id', $id);
-            })
+            ->whereNot('forms.id', $id)
             ->where('is_night', $is_night)
             ->where(function ($query) use ($is_night) {
                 $query

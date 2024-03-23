@@ -13,7 +13,7 @@
                 :name="name"
                 ref="input"
                 :class="`
-                ${error ? 'border-red-500 dark:focus:ring-red-900 focus:border-red-500 pr-10 dark:focus:border-red-500' : 'border-light-gray-300 dark:border-dark-gray-700 focus:border-primary-500 dark:!ring-primary-900 !ring-primary-100 dark:focus:border-primary-300' }
+                ${error ? 'border-red-500 dark:focus:ring-red-900 focus:border-red-500 pr-10 dark:focus:border-red-500' : 'border-secondary focus:border-primary-500 dark:!ring-primary-900 !ring-primary-100 dark:focus:border-primary-300' }
                 ${icon ? 'w-full pl-10' : ''}
                 ${suffix ? 'rounded-l-md' : 'rounded-md'}
                 `"
