@@ -77,11 +77,18 @@
                              v-model="data.epa"
                     />
                 </div>
-                <SecuCard :agents="form.agents"
-                          :form="data"
-                          title="Cadre securité"
-                          v-model="data.secu"
-                />
+               <div class="space-y-4">
+                   <SecuCard :agents="form.agents"
+                             :form="data"
+                             title="Cadre securité"
+                             v-model="data.secu"
+                   />
+                   <FptCard :agents="form.agents"
+                             :form="data"
+                             title="FPT"
+                             v-model="data.ca_fpt"
+                   />
+               </div>
                 <div class="space-y-4" v-if="!form.is_night">
                     <PharmacieCard
                         :agents="form.agents"
@@ -122,6 +129,7 @@ import PharmacieCard from "@/Pages/Form/vehicles/PharmacieCard.vue";
 import RemiseCard from "@/Pages/Form/vehicles/RemiseCard.vue";
 import CuisineCard from "@/Pages/Form/vehicles/CuisineCard.vue";
 import {watch} from "vue";
+import FptCard from "@/Pages/Form/vehicles/FptCard.vue";
 
 defineOptions({layout: AuthenticatedLayout})
 
@@ -150,6 +158,7 @@ const data = useForm({
     vli: props.form.vli,
     epa: props.form.epa,
     secu: props.form.secu,
+    ca_fpt: props.form.ca_fpt,
     pharmacie: props.form.pharmacie,
     remise: props.form.remise,
     cuisine: props.form.cuisine,

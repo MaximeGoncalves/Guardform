@@ -18,6 +18,7 @@ export default {
 	EPA: "EPA",
 
 	SECU: "CADRE SECU",
+	CA_FPT: "CA FPT",
 
 	CA_VTU: "CA VTU",
 	COND_VTU: "COND VTU",

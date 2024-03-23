@@ -9,8 +9,9 @@
             </div>
         </div>
         <div>
+            <h2>SPP</h2>
             <ul>
-                <li v-for="agent in form.agents" :key="agent.id"
+                <li v-for="agent in spp" :key="agent.id"
                     class="flex items-center justify-between bg-secondary mb-1">
                     <span :class="{'line-through text-secondary': !displayable(agent)}">{{
                             agent.name
@@ -20,7 +21,20 @@
                                          v-if="displayable(agent)" @click="removeAgent(agent.id)"/>
                 </li>
             </ul>
-            <span>Total : {{ form.agents.length }}</span>
+            <hr class="my-4">
+            <h2>SPV</h2>
+            <ul>
+                <li v-for="agent in spv" :key="agent.id"
+                    class="flex items-center justify-between bg-secondary mb-1">
+                    <span :class="{'line-through text-secondary': !displayable(agent)}">{{
+                            agent.name
+                        }} {{ agent.firstname }} </span>
+                    <VBadge color="brand" v-if="!displayable(agent)">{{ getVehicle(agent) }}</VBadge>
+                    <ArchiveBoxXMarkIcon class="text-red-400 hover:text-red-600 w-4 h-4 cursor-pointer"
+                                         v-if="displayable(agent)" @click="removeAgent(agent.id)"/>
+                </li>
+            </ul>
+            <span class="block mt-4">Total : {{ form.agents.length }}</span>
         </div>
         <hr class="my-2">
         <div>
@@ -33,7 +47,10 @@
                     COD1: {{ cod_count }}
                 </div>
                 <div>
-                    CA_TOUT_ENGIN: {{ caengin_count }}
+                    CA TOUT ENGIN: {{ caengin_count }}
+                </div>
+                <div>
+                    CE: {{ ce_count }}
                 </div>
             </div>
         </div>
@@ -90,6 +107,13 @@ function removeAgent(agent) {
     })
 }
 
+const spp = computed(() => {
+    return props.form.agents.filter(item => item.status === 'SPP');
+})
+
+const spv = computed(() => {
+    return props.form.agents.filter(item => item.status === 'SPV');
+})
 
 const epa_count = computed(() => {
     return props.form.agents.filter(item => item.skills.some(skill => skill.id === Skills.EPA)).length;
@@ -97,6 +121,10 @@ const epa_count = computed(() => {
 
 const cod_count = computed(() => {
     return props.form.agents.filter(item => item.skills.some(skill => skill.id === Skills.COD1)).length;
+})
+
+const ce_count = computed(() => {
+    return props.form.agents.filter(item => item.skills.some(skill => skill.id === Skills.CHEF_EQUIPE)).length;
 })
 
 const caengin_count = computed(() => {

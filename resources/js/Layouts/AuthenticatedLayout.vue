@@ -66,6 +66,10 @@ const showingNavigationDropdown = ref(false);
                                          v-if="usePage().props.auth.user.is_admin">
                                     Utilisateurs
                                 </NavLink>
+                                <NavLink :href="route('stats.index')" :active="route().current('stats.*')"
+                                         v-if="usePage().props.auth.user.is_admin">
+                                    Stats
+                                </NavLink>
                             </div>
                         </div>
 
@@ -160,6 +164,10 @@ const showingNavigationDropdown = ref(false);
                         <ResponsiveNavLink :href="route('users.index')" :active="route().current('users.*')"
                                  v-if="usePage().props.auth.user.is_admin">
                             Utilisateurs
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink :href="route('stats.index')" :active="route().current('stats.*')"
+                                           v-if="usePage().props.auth.user.is_admin">
+                            Stats
                         </ResponsiveNavLink>
                     </div>
 

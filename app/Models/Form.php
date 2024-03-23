@@ -25,4 +25,12 @@ class Form extends Model
     {
         return $this->belongsTo(Guard::class, 'guard_id', 'id');
     }
+
+    public function scopeStats($id, $is_night)
+    {
+        $this->with('garde')
+            ->when(!is_null($id), function ($query, $id) {
+                $query->whereNot('forms.id', $id);
+            });
+    }
 }

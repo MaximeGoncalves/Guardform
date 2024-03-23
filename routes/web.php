@@ -25,6 +25,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
+    Route::get('/stats', [\App\Http\Controllers\StatsController::class, 'index'])->name('stats.index');
     Route::put('/forms/{form}/agents', \App\Http\Controllers\AddAgentToFormController::class)->name('forms.agents.add');
     Route::put('/forms/{form}/agents/delete', \App\Http\Controllers\RemoveAgentFromFormController::class)->name('forms.agents.delete');
     Route::resource('/guards', \App\Http\Controllers\GuardController::class);

@@ -46,6 +46,7 @@ class UpdateFormRequest extends FormRequest
             'vli' => 'nullable|numeric',
             'epa' => 'nullable|numeric',
             'secu' => 'nullable|numeric',
+            'ca_fpt' => 'nullable|numeric',
             'pharmacie' => 'nullable|numeric',
             'remise' => 'nullable|numeric',
             'cuisine' => 'nullable|numeric',
