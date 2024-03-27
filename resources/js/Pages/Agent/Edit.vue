@@ -35,7 +35,7 @@
 
         </div>
         <div class="flex justify-end mt-4">
-            <PrimaryButton @click="update">Modifier</PrimaryButton>
+            <PrimaryButton @click="update">Enregistrer</PrimaryButton>
         </div>
     </div>
 </template>

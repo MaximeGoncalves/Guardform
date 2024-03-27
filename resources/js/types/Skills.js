@@ -23,5 +23,7 @@ export default {
 	COD2: 10,
 	PHARMACIE: 11,
 	REMISE: 12,
-	CUISINE: 13
+	CUISINE: 13,
+	OFFICIER: 14,
+	ADJUDANT: 15,
 }

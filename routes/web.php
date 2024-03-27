@@ -20,6 +20,44 @@ Route::get('/', function () {
     return redirect()->route('dashboard');
 });
 
+Route::get('/recap/{guard}', function (\App\Models\Guard $guard) {
+    return Inertia::render('Recap', [
+        'guard' => $guard->load(['forms' => function ($q) {
+            $q->with([
+                'garde',
+                'caVsav1',
+                'caVsav2',
+                'caVsav3',
+                'caVtu',
+                'caVsr',
+                'condVsav1',
+                'condVsav2',
+                'condVsav3',
+                'condVtu',
+                'condVsr',
+                'eqVsav1',
+                'eqVsav2',
+                'eqVsav3',
+                'eqVtu',
+                'eqVsr',
+                'caFptl',
+                'condFptl',
+                'ce1Fptl',
+                'ce2Fptl',
+                'eq1Fptl',
+                'eq2Fptl',
+                'vli',
+                'epa',
+                'secu',
+                'cuisine',
+                'officier',
+                'adjudant',
+                'planton',
+            ]);
+        }])
+    ]);
+})->name('recap');
+
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -37,4 +75,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

@@ -7,6 +7,7 @@
             </div>
             <textarea
                 ref="input"
+                :rows="rows"
                 :class="`
                 ${error ? 'border-red-500 dark:focus:ring-red-900 focus:border-red-500 pr-10 dark:focus:border-red-500' : 'border-primary focus:border-primary-500 dark:ring-primary-900 ring-primary-100 dark:focus:border-primary-300' }
                 ${icon ? 'w-full pl-10' : ''}
@@ -32,7 +33,7 @@
 import { onMounted, ref } from 'vue'
 import { ExclamationCircleIcon } from '@heroicons/vue/24/outline'
 
-defineProps(['modelValue', 'label', 'disabled', 'icon', 'hint', 'placeholder', 'error', 'required'])
+defineProps(['modelValue', 'label', 'disabled', 'icon', 'hint', 'placeholder', 'error', 'required', 'rows'])
 const input = ref(null)
 const emit = defineEmits(['update:modelValue', 'change'])
 

@@ -23,7 +23,7 @@
             </ul>
             <hr class="my-4">
             <h2>SPV</h2>
-            <ul>
+            <ul v-if="spv.length > 0">
                 <li v-for="agent in spv" :key="agent.id"
                     class="flex items-center justify-between bg-secondary mb-1">
                     <span :class="{'line-through text-secondary': !displayable(agent)}">{{
@@ -34,6 +34,9 @@
                                          v-if="displayable(agent)" @click="removeAgent(agent.id)"/>
                 </li>
             </ul>
+            <div v-else>
+                Aucun SPV
+            </div>
             <span class="block mt-4">Total : {{ form.agents.length }}</span>
         </div>
         <hr class="my-2">

@@ -21,7 +21,7 @@ const ca_agents = computed(() => {
 })
 
 const selectable = function (item) {
-    const { remise, pharmacie, cuisine, ...restForm } = props.form;
+    const {remise, pharmacie, cuisine, officier, ...restForm} = props.form.data();
 
     // Vérifie si l'ID de l'élément est présent dans le reste du formulaire (hors exceptions)
     return Object.values(restForm).indexOf(item.id) < 0

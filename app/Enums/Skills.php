@@ -19,6 +19,8 @@ enum Skills: int
     case PHARMACIE = 11;
     case REMISE = 12;
     case CUISINE = 13;
+    case OFFICIER = 14;
+    case ADJUDANT = 15;
 
     public function name(): string
     {
@@ -36,6 +38,8 @@ enum Skills: int
             self::PHARMACIE => 'PHARMACIE',
             self::REMISE => 'REMISE',
             self::CUISINE => 'CUISINE',
+            self::OFFICIER => 'OFFICIER DE GARDE',
+            self::ADJUDANT => 'ADJUDANT DE GARDE',
         };
     }
 }

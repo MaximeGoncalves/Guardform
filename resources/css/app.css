@@ -8,12 +8,6 @@
 
 @layer base {
     h2{
-        @apply text-2xl font-semibold;
-    }
-    h2{
-        @apply text-xl font-semibold;
-    }
-    h2{
-        @apply text-lg font-semibold;
+        @apply  font-semibold;
     }
 }

@@ -50,6 +50,9 @@ class UpdateFormRequest extends FormRequest
             'pharmacie' => 'nullable|numeric',
             'remise' => 'nullable|numeric',
             'cuisine' => 'nullable|numeric',
+            'officier' => 'nullable|numeric',
+            'adjudant' => 'nullable|numeric',
+            'planton' => 'nullable|numeric',
         ];
     }
 }

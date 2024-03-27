@@ -11,12 +11,23 @@
                       class="text-indigo-400 hover:text-indigo-600 text-sm">Modifier la journée
                 </Link>
             </div>
-            <!--            <primary-button @click="update" :form="data" :icon="PlusIcon">Enregistrer</primary-button>-->
+            <Link :href="route('recap', form.garde.id)"
+                  class="text-indigo-400 hover:text-indigo-600 text-sm">Recap
+            </Link>
+<!--                        <primary-button @click="update" :form="data" :icon="PlusIcon">Enregistrer</primary-button>-->
         </header>
 
         <div class="lg:flex lg:space-x-2 items-start max-lg:space-y-4">
             <FormAgent :agents :form :data></FormAgent>
-            <div class="flex-1 bg-white grid grid-col-1 lg:grid-cols-4 gap-x-4 gap-y-8 p-2 shadow rounded items-start">
+            <div class="flex-1 bg-white grid grid-col-1 lg:grid-cols-3 xl:grid-cols-4 gap-x-4 gap-y-8 p-2 shadow rounded items-start">
+                <OfficierCard :agents="form.agents" :form="data" title="Officier de garde" v-model="data.officier"></OfficierCard>
+                <AdjudantCard :agents="form.agents" :form="data" title="Adjudant de garde" v-model="data.adjudant"></AdjudantCard>
+                <SecuCard :agents="form.agents"
+                          :form="data"
+                          title="Cadre securité"
+                          v-model="data.secu"
+                />
+                <PlantonCard :agents="form.agents" :form="data" title="Planton" v-model="data.planton"></PlantonCard>
                 <VsavCard :agents="form.agents"
                           :form="data"
                           title="VSAV 1"
@@ -31,38 +42,29 @@
                           v-model:cond="data.cond_vsav2"
                           v-model:eq="data.eq_vsav2"
                 />
-                <VtuCard
-                    :agents="form.agents"
-                    :form="data"
-                    title="VTU"
-                    v-model:ca="data.ca_vtu"
-                    v-model:cond="data.cond_vtu"
-                    v-model:eq="data.eq_vtu"
+                <VsavCard :agents="form.agents"
+                          :form="data"
+                          title="VSAV 3"
+                          v-model:ca="data.ca_vsav3"
+                          v-model:cond="data.cond_vsav3"
+                          v-model:eq="data.eq_vsav3"
                 />
-                <VtuCard
-                    :agents="form.agents"
-                    :form="data"
-                    title="VSR"
-                    v-model:ca="data.ca_vsr"
-                    v-model:cond="data.cond_vsr"
-                    v-model:eq="data.eq_vsr"
+                <VliCard :agents="form.agents"
+                         :form="data"
+                         title="VLI"
+                         v-model="data.vli"
                 />
-                <FptlCard
-                    :agents="form.agents"
-                    :form="data"
-                    title="FPTL"
-                    v-model:ca="data.ca_fptl"
-                    v-model:cond="data.cond_fptl"
-                    v-model:ce1="data.ce1_fptl"
-                    v-model:ce2="data.ce2_fptl"
-                    v-model:eq1="data.eq1_fptl"
-                    v-model:eq2="data.eq2_fptl"
-                />
-                <div class="space-y-4">
-                    <VliCard :agents="form.agents"
-                             :form="data"
-                             title="VLI"
-                             v-model="data.vli"
+                <div class="space-y-8">
+                    <FptlCard
+                        :agents="form.agents"
+                        :form="data"
+                        title="FPTL"
+                        v-model:ca="data.ca_fptl"
+                        v-model:cond="data.cond_fptl"
+                        v-model:ce1="data.ce1_fptl"
+                        v-model:ce2="data.ce2_fptl"
+                        v-model:eq1="data.eq1_fptl"
+                        v-model:eq2="data.eq2_fptl"
                     />
                     <EpaCard :agents="form.agents"
                              :form="data"
@@ -70,19 +72,31 @@
                              v-model="data.epa"
                     />
                 </div>
-                <div class="space-y-4">
-                    <SecuCard :agents="form.agents"
-                              :form="data"
-                              title="Cadre securité"
-                              v-model="data.secu"
+                <FptCard :agents="form.agents"
+                         :form="data"
+                         title="FPT"
+                         v-model="data.ca_fpt"
+                />
+                <div class="space-y-8">
+                    <VtuCard
+                        :agents="form.agents"
+                        :form="data"
+                        title="VTU"
+                        v-model:ca="data.ca_vtu"
+                        v-model:cond="data.cond_vtu"
+                        v-model:eq="data.eq_vtu"
                     />
-                    <FptCard :agents="form.agents"
-                             :form="data"
-                             title="FPT"
-                             v-model="data.ca_fpt"
+                    <VtuCard
+                        :agents="form.agents"
+                        :form="data"
+                        title="VSR"
+                        v-model:ca="data.ca_vsr"
+                        v-model:cond="data.cond_vsr"
+                        v-model:eq="data.eq_vsr"
                     />
                 </div>
-                <div class="space-y-4" v-if="!form.is_night">
+                <div class="space-y-4">
+                </div>
                     <PharmacieCard
                         :agents="form.agents"
                         :form="data"
@@ -98,20 +112,20 @@
                         :form="data"
                         title="Cuisine"
                         v-model="data.cuisine"/>
-                </div>
-
                 <div class="col-span-4 flex w-full space-x-4">
-                    <div class="w-2/4">
-                        <h2>FMA 1</h2>
-                        <VInput v-model="guardData.fma1"/>
-                    </div>
-                    <div class="w-2/4">
-                        <h2>FMA 2</h2>
-                        <VInput v-model="guardData.fma2"/>
+                    <div class="w-2/4 space-y-4">
+                        <div>
+                            <h2>FMA 1</h2>
+                            <VInput v-model="guardData.fma1"/>
+                        </div>
+                        <div>
+                            <h2>FMA 2</h2>
+                            <VInput v-model="guardData.fma2"/>
+                        </div>
                     </div>
                     <div class="w-full">
                         <h2>Consignes / Notes</h2>
-                        <VTextarea v-model="guardData.consignes"></VTextarea>
+                        <VTextarea v-model="guardData.consignes" rows="7"></VTextarea>
                     </div>
                 </div>
             </div>
@@ -145,6 +159,9 @@ import StatsTable from "@/Pages/Stats/StatsTable.vue";
 import VInput from "@/Components/Base/VInput.vue";
 import debounce from 'lodash.debounce'
 import VTextarea from "@/Components/Base/VTextarea.vue";
+import OfficierCard from "@/Pages/Form/vehicles/OfficierCard.vue";
+import AdjudantCard from "@/Pages/Form/vehicles/AdjudantCard.vue";
+import PlantonCard from "@/Pages/Form/vehicles/PlantonCard.vue";
 defineOptions({layout: AuthenticatedLayout})
 
 const props = defineProps({form: Object, agents: Array})
@@ -183,6 +200,9 @@ const data = useForm({
     pharmacie: props.form.pharmacie,
     remise: props.form.remise,
     cuisine: props.form.cuisine,
+    officier: props.form.officier,
+    adjudant: props.form.adjudant,
+    planton: props.form.planton,
 })
 
 watch(() => data.data(), function (old, value) {

@@ -1,9 +1,8 @@
 <template>
     <div>
         <h2>{{ title }}</h2>
-        <VehicleSelect label="fullname" :options="secu_agents" placeholder="COND" v-model="secu"
-                       :reduce="item => item.id"
-                       :selectable="selectable" stats="secu"></VehicleSelect>
+        <VehicleSelect label="fullname" :options="adjudants_agents" v-model="adjudant" :reduce="item => item.id"
+                 :selectable="selectable" stats="vli"></VehicleSelect>
     </div>
 </template>
 
@@ -15,16 +14,14 @@ import VehicleSelect from "@/Components/VehicleSelect.vue";
 
 const props = defineProps({title: String, form: Object, agents: Array})
 
-const secu = defineModel()
+const adjudant = defineModel()
 
-const secu_agents = computed(() => {
-    return props.agents
+const adjudants_agents = computed(() => {
+    return props.agents.filter(item => item.status === 'SPV')
 })
 
 const selectable = function (item) {
-    const { remise, pharmacie, cuisine, adjudant, ...restForm } = props.form.data();
-
     // Vérifie si l'ID de l'élément est présent dans le reste du formulaire (hors exceptions)
-    return Object.values(restForm).indexOf(item.id) < 0
+    return Object.values(props.form).indexOf(item.id) < 0
 }
 </script>
