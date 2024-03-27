@@ -53,7 +53,8 @@ Route::get('/recap/{guard}', function (\App\Models\Guard $guard) {
                 'officier',
                 'adjudant',
                 'planton',
-            ]);
+            ])
+            ->withCount('agents');
         }])
     ]);
 })->name('recap');

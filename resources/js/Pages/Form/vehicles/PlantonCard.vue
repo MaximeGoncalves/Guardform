@@ -2,7 +2,7 @@
     <div>
         <h2>{{ title }}</h2>
         <VehicleSelect label="fullname" :options="adjudants_agents" v-model="adjudant" :reduce="item => item.id"
-                 :selectable="selectable" stats="vli"></VehicleSelect>
+                       :selectable="selectable" stats="vli"></VehicleSelect>
     </div>
 </template>
 
@@ -21,7 +21,11 @@ const adjudants_agents = computed(() => {
 })
 
 const selectable = function (item) {
+    if (props.form.is_night) {
+        return Object.values(props.form).indexOf(item.id) < 0
+    } else {
+        return item.id === props.form.eq2_fptl
+    }
     // Vérifie si l'ID de l'élément est présent dans le reste du formulaire (hors exceptions)
-    return Object.values(props.form).indexOf(item.id) < 0
 }
 </script>

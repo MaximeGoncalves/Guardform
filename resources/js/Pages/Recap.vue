@@ -1,13 +1,20 @@
 <template>
     <div class="bg-gray-50 h-screen">
-        <div class="container mx-auto py-10 px-8">
-            <h1 class="text-3xl font-semibold mb-6">Garde du {{ moment(guard.date).locale('fr').format('LL') }}</h1>
+        <div class="mx-auto py-10 px-8">
+            <div class="xl:flex justify-between items-center">
+                <h1 class="text-3xl font-semibold mb-2 xl:mb-6">Garde du {{ moment(guard.date).locale('fr').format('LL') }}</h1>
+                <div >
+                    <div class="uppercase text-xs text-gray-500">Effectif</div>
+                    <div class="flex space-x-8">
+                        <p>Jour : {{ guard.forms[0].agents_count }}</p><p>Nuit : {{ guard.forms[1].agents_count }}</p>
+                    </div>
+                </div>
+            </div>
             <div class="grid grid-cols-1 md:grid-cols-2  lg:grid-cols-3 xl:grid-cols-4 gap-4 items-start">
                 <OneCardItem title="Officier de garde" :day="day.officier?.name" :night="night.officier?.name" />
                 <OneCardItem title="Adjudant de garde" :day="day.adjudant?.name" :night="night.adjudant?.name" />
                 <OneCardItem title="Cadre Sécurité" :day="day.secu?.name" :night="night.secu?.name"/>
                 <OneCardItem title="Planton" :day="day.planton?.name" :night="night.planton?.name"/>
-
                 <VsavCardItem title="VSAV 1"
                               :ca_day="day.ca_vsav1"
                               :ca_night="night.ca_vsav1"

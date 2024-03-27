@@ -1,6 +1,6 @@
 <template>
     <div class="text-gray-950 bg-white p-4 rounded ring-1 ring-gray-200">
-    <h2 class="text-lg font-semibold mb-4 text-gray-950">{{ title }}</h2>
+    <h2 class=" font-semibold mb-4 text-gray-950">{{ title }}</h2>
     <div class="space-y-2">
         <div class="flex items-center uppercase text-xs text-gray-500">
             <div class="w-16"></div>
